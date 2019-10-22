@@ -13,7 +13,6 @@ class HarmonicCursor(_SelectorWidget):
         self.steps = 0
         self.text = 0
 
-        # Reset canvas so that `new_axes` connects events.
         self.canvas = None
         self._init_axes(ax)
 
@@ -29,7 +28,7 @@ class HarmonicCursor(_SelectorWidget):
             self.artists.append(self.ax.text(0, 0, "", bbox={"facecolor": "w", "alpha": 0.5, "pad": 5}, fontsize=10))
 
         for i in range(self.num_of_cursors):
-            tmp_line = self.ax.axvline(x=0)
+            tmp_line = self.ax.axvline(x=0, color=self.color)
             self.artists.append(tmp_line)
 
     def update_cursor(self):
@@ -107,7 +106,7 @@ if __name__ == "__main__":
     ax2.plot(np.fft.fftfreq(fft_data.size, d=1/rate), fft_data)
     ax2.set_xlim(0, int(rate/2))
 
-    harmonic_cursor = HarmonicCursor(ax=ax2, onselect=on_select, num_of_cursor=20, color="red", animate_text=True)
+    harmonic_cursor = HarmonicCursor(ax=ax2, onselect=on_select, num_of_cursor=20, color="red")
 
     plt.show()
 
